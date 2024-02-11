@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ソーダ灰注入量計算</title>
+    <style>
+
+body{
+  background-image: url(image/image.jpg);
+  background-size: cover;
+}
+
+form dl dt {
+    background-color: rgb(156, 230, 225);
+    width: 200px;
+    height: 40px;
+    padding: 10px 0;
+    line-height: 40px;
+    float: left;
+}
+form dl dd {
+    padding: 10px 0;
+    margin: 0;
+}
+.box {
+  
+    box-sizing: border-box;
+    width: 150px !important;
+    height: 40px !important;
+    margin: 0 !important;
+    padding: 0 0px !important;
+}
+.calc-btn {
+    width: 100px;
+    height: 30px;
+    border: 1px solid #333;
+}
+.calc-btn:hover {
+    cursor: pointer;
+}  
+    </style>
+  </head>
+  <body>
+    <div class="contents">
+      <form class="form">
+        <dl>
+            <dt>希釈したい濃度(ppm)：</dt>
+            <dd><input id="id1" type="number" class="box" name="dilution_rate"></dd>
+            <dt>処理水量(L)：</dt>
+            <dd><input id="id2" type="number" class="box" name="pwa"></dd>
+            <dt>次亜濃度(%)：</dt>
+            <dd><input id="id3" class="box" type="number" name="Sodium_hypochlorite_concentration"></dd>
+            <dt>比重：</dt>
+            <dd><input id="id4" class="box" type="number" name="specific_gravity"></dd>
+            <p><input type="button" class="calc-btn" onclick="calc(dilution_rate.value, pwa.value, Sodium_hypochlorite_concentration.value, specific_gravity.value);" value="計算"></p>
+            <dt>次亜必要量(L)：</>
+            <dd><input id="id5" class="box" type="text" readonly=""></dd>
+            <dt>次亜必要量(kg)：</>
+              <dd><input id="id6" class="box" type="text" readonly=""></dd>
+        </dl>
+      </form>
+    </div>
+    <script>
+      function calc(dilution_rate, pwa, Sodium_hypochlorite_concentration, specific_gravity) {
+        const dilution_rate_value = document.getElementById('id1').value;
+        const pwa_value = document.getElementById('id2').value;
+        const Sodium_hypochlorite_concentration_value = document.getElementById('id3').value;
+        const specific_gravity_value = document.getElementById('id4').value;
+        const require_amount_volume = dilution_rate_value * pwa_value / (Sodium_hypochlorite_concentration_value * 10000);
+        const require_amount_mass = dilution_rate_value * pwa_value / (Sodium_hypochlorite_concentration_value * 10000) * specific_gravity_value;
+        document.getElementById('id5').value = require_amount_volume;
+        document.getElementById('id6').value = require_amount_mass;
+    }
+    </script>
+  </body>
+</html>
