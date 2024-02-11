@@ -1,3 +1,3 @@
 Code<>からdownload zipでダウンロード
 
-javascript_calc.htmlをブラウザで開く(右クリック)
+解凍してからjavascript_calc.htmlをブラウザで開く
